@@ -9,6 +9,6 @@
 # include "PhoneBook.hpp"
 # include "Contact.hpp"
 
-void    readline(std::string &str, std::string prompt);
+bool    readline(std::string &str, std::string prompt);
 
 #endif

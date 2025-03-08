@@ -3,17 +3,14 @@
 Zombie::Zombie(std::string name)
 {
     this->name = name;
-    return;
 }
 
 Zombie::~Zombie(void)
 {
-    std::cout << "The Zombie died." << std::endl;
-    return ;
+    std::cout << "The Zombie\e[31m " << this->name << "\e[0m died." << std::endl;
 }
 
 void    Zombie::announce(void)
 {
-    std::cout << name << ": BraiiiiiiinnnzzzZ..." << std::endl;
-    return ;
+    std::cout << "\e[32m" << name << "\e[0m: BraiiiiiiinnnzzzZ..." << std::endl;
 }

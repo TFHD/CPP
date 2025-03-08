@@ -8,12 +8,12 @@ class PhoneBook {
 
     private:
 	    int size;
-        Contact *contacts;
+        Contact contacts[8];
 
     public:
         PhoneBook(void);
         ~PhoneBook(void);
-        void    add_contact(void);
+        void    add_contact(int i);
         void    list_contacts(void);
         void    display_contact(int i);
         int     get_size(void);

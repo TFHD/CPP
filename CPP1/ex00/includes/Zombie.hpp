@@ -1,5 +1,8 @@
-#include <string>
-#include <iostream>
+#ifndef ZOMBIE_HPP
+# define ZOMBIE_HPP
+
+# include <string>
+# include <iostream>
 
 class Zombie
 {
@@ -11,3 +14,5 @@ class Zombie
         ~Zombie(void);
         void    announce(void);
 };
+
+#endif

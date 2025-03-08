@@ -6,10 +6,7 @@ HumanB::HumanB(std::string name) : _weapon(NULL)
     return ;
 }
 
-HumanB::~HumanB(void)
-{
-    return ;
-}
+HumanB::~HumanB(void) {}
 
 void    HumanB::attack(void)
 {
