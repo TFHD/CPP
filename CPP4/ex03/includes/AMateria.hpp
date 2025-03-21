@@ -4,7 +4,7 @@
 # include <string>
 # include <iostream>
 # include "ICharacter.hpp"
-# define LOG 0
+# define LOG 1
 
 class AMateria
 {

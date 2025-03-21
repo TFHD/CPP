@@ -1,0 +1,33 @@
+#include "../includes/easyfind.hpp"
+#include <vector>
+#include <iostream>
+#include <sstream>
+
+int returnErrorMessage(std::string msg, int error)
+{
+    std::cout << msg << std::endl;
+    return error;
+}
+
+int main(int ac, char **av) {
+    if (ac <= 2)
+    {
+        std::cout << "Usage : /EasyFind <number_list>[...] <number_to_find>" << std::endl;
+        std::cout << "Exemple : /EasyFind 1 2 3 4 2 >> return 1 because number_to_find is 2 and number_list is [1, 2, 3, 4]" << std::endl;
+        return (1);
+    }
+
+    std::vector<int> numbers;
+    int search;
+    int current;
+
+    if (!(std::istringstream(av[ac - 1]) >> search))
+        return (returnErrorMessage("This entry is not a int !", 1));
+
+    for (int i = 0; i < ac - 2; i++) {
+        if (!(std::istringstream(av[i + 1]) >> current))
+            return (returnErrorMessage("This entry is not a int !", 1));
+        numbers.push_back(current);
+    }
+    std::cout << "Index of the search number is : " << easyfind(numbers, search) << std::endl;
+}
