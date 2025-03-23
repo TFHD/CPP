@@ -1,13 +1,14 @@
-#include "../includes/PmergeMe.hpp"
+#include "PmergeMe.hpp"
 
 int main(int ac, char **av)
 {
     if (ac <= 1) {
-        std::cerr << "Error: No input sequence provided." << std::endl;
+        std::cout << "Usage : /PmergeMe [list_of_positive_numbers]" << std::endl;
         return 1;
     }
-	PmergeMe pmergeme;
-    pmergeme.mergeSort(ac, av);
+    PmergeMe pmergeme;
 
+    try { pmergeme.sort(ac, av); }
+    catch(const std::exception& e) { std::cerr << e.what() << '\n'; return 1; } 
     return 0;
 }

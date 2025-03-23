@@ -13,7 +13,6 @@ int main(int ac, char **av)
         btc.loadData();
         btc.printChangeBitcoinValue(av[ac - 1]);
     }
-    catch(const std::exception& e) { std::cerr << e.what() << '\n'; }
-
+    catch(const std::exception &e) { std::cerr << e.what() << '\n'; }
     return 0;    
 }

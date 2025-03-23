@@ -65,7 +65,7 @@ int main(void)
         std::cout << "Accessing a valid index 5: " << array1[5] << std::endl;
         std::cout << "Accessing an invalid index: " << array1[len] << std::endl;
     }
-    catch (Array<int>::OutOfBoundsException &e) {
+    catch (std::exception &e) {
         std::cout << "Error: " << e.what() << std::endl;
     }
     return (0);

@@ -20,16 +20,3 @@ int main(void)
 
     return (0);
 }
-
-int main2(void)
-{
-    RobotomyRequestForm  a("caca");
-
-    RobotomyRequestForm b;
-
-    b = a;
-
-    std::cout << a << a.getTarget() << "\n";
-    std::cout << b << b.getTarget() << "\n";
-    return 0;
-}

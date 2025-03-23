@@ -72,5 +72,24 @@ int main(void)
     }
     catch(const Span::NotEnoughValues &e) { std::cout << e.what() << std::endl; }
     std::cout << std::endl;
+
+    //------------------TEST 10000+ NUMBERS---------------------//
+
+    std::cout << std::endl << "TEST 10000+ NUMBERS" << std::endl << std::endl;
+    Span sp3 = Span(20000);
+    std::vector<int> array2;
+    for (int i = 0; i < 20000; i++)
+        array2.push_back(i * 3 - i + i / 2);
+    try
+    { sp3.addNumberList(array2.begin(), array2.end()); }
+    catch(const Span::TooMuchValue &e) { std::cout << e.what() << std::endl; }
+    try
+    {
+        std::cout << sp3.shortestSpan() << std::endl;
+        std::cout << sp3.longestSpan() << std::endl;
+    }
+    catch(const Span::NotEnoughValues &e) { std::cout << e.what() << std::endl; }
+    std::cout << std::endl;
+
     return 0;
 }

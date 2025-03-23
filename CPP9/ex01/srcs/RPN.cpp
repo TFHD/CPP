@@ -35,8 +35,7 @@ std::string RPN::solveRPN(std::stack<char> &stack)
 
     for (int i = 0; stack.size() != 0; i++) {
         if (stack.top() == '+' || stack.top() == '*' || stack.top() == '-' || stack.top() == '/') {
-            if (rpn.size() <= 1)
-                throw std::runtime_error("Error");
+            if (rpn.size() <= 1) throw std::runtime_error("Error");
             x = rpn.top();
             rpn.pop();
             y = rpn.top();
@@ -44,21 +43,17 @@ std::string RPN::solveRPN(std::stack<char> &stack)
             if (stack.top() == '+') rpn.push(y + x);
             if (stack.top() == '*') rpn.push(y * x);
             if (stack.top() == '/') {
-                if (x == 0) return "division by 0 is forbidden";
+                if (x == 0) throw std::runtime_error("Error : division by 0 is forbidden");
                 rpn.push(y / x);
             }
             if (stack.top() == '-') rpn.push(y - x);
         }
-        else
-            rpn.push(stack.top() - '0');
+        else rpn.push(stack.top() - '0');
         stack.pop();
     }
-    if (rpn.size() != 1)
-        throw std::runtime_error("Error");
-    if (rpn.top() > __INT_MAX__)
-        return "inf+";
-    if (rpn.top() < -__INT_MAX__ + 1)
-        return "inf-";
+    if (rpn.size() != 1) throw std::runtime_error("Error");
+    if (rpn.top() > __INT_MAX__) return "inf+";
+    if (rpn.top() < -__INT_MAX__ + 1) return "inf-";
     std::ostringstream oss;
     oss << rpn.top();
     std::string str = oss.str();

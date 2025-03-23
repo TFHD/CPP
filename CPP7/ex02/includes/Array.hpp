@@ -24,6 +24,7 @@ class Array {
             for (unsigned int i = 0; i < src._size; i++)
                 array[i] = src.array[i];
         };
+
         Array &operator=(const Array &cpy) {
             if (this != &cpy) {
                 if (_size != 0)
@@ -37,21 +38,14 @@ class Array {
             }
             return *this;
         };
+
         T &operator[](unsigned int i) {
             if (i < 0 || i >= _size)
-                throw Array::OutOfBoundsException();
+                throw std::runtime_error("Index out of bounds !");
             return array[i];
         };
 
         unsigned int size(void) const { return _size; };
-
-        class OutOfBoundsException : public std::exception {
-
-            public:
-                virtual const char *what() const throw() {
-                    return ("Index out of bounds !");
-                }
-        };
 };
 
 #endif

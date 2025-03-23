@@ -4,7 +4,6 @@
 # include <iostream>
 
 template <class T>
-
 void iter(T *adr, int len, void (*func)(T &)) {
     for (int i = 0; i < len; i++)
         func(adr[i]);

@@ -1,17 +1,17 @@
 #ifndef EASYFIND_HPP
 # define EASYFIND_HPP
 
-# define auto __auto_type
+# include <algorithm>
+# include <iostream>
 
 template <class T>
+void easyfind(T &container, int nb) {
 
-unsigned int easyfind(T &container, int nb) {
-    unsigned int i = 0;
-    for (__auto_type it = container.begin(); it != container.end(); it++) {
-        if (nb == *it)
-            return i;
-        i++;
-    }
-    return -1;
+    typename T::const_iterator it;
+    it = std::find(container.begin(), container.end(), nb);
+    if (it != container.end())
+        std::cout << "Element found : [" << nb << "]" << std::endl;
+    else
+        std::cout << "No element found : [" << nb << "]" << std::endl;
 }
 #endif

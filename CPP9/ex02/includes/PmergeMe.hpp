@@ -1,19 +1,21 @@
 #ifndef PMERGEME_HPP
 # define PMERGEME_HPP
 
-# include <iostream>
-# include <deque>
 # include <list>
-# include <algorithm>
-# include <ctime>
+# include <vector>
+# include <iostream>
+# include <iterator>
 # include <cstdlib>
+# include <sstream>
+# include <cstdio>
+# include <ctime>
 # define LOG 0
 
 class PmergeMe {
 
     private:
-        std::deque<int> inputDeque;
-        std::list<int> inputList;
+        std::vector<int> vec;
+        std::list<int> list;
 
     public:
         PmergeMe(void);
@@ -21,11 +23,14 @@ class PmergeMe {
         PmergeMe(const PmergeMe &cpy);
         PmergeMe &operator=(const PmergeMe &src);
 
-        template <typename T>
-        void display(const T& container);
-        void mergeSort(int ac, char **av);
-        void mergeInsertSortDeque(std::deque<int>& arr);
-        void mergeInsertSortList(std::list<int>& arr);
+        void sort(int ac, char **av);
+        void execute(std::vector<int> &vector, std::list<int> &list);
+        void mergeSort(std::list<int> &list);
+        void sort_elem(std::list<int> &left, std::list<int> &right, std::list<int> &list);
+        void mergeSort(std::vector<int> &vector);
+        void sort_elem(std::vector<int> &left, std::vector<int> &right, std::vector<int> &vector);
+        template <class T>
+        void display(T &container);
 };
 
 #endif

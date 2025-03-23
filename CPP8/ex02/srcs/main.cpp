@@ -184,8 +184,7 @@ void subjectMain(void)
     ++it;
     --it;
 
-    while (it != ite)
-    {
+    while (it != ite) {
         std::cout << *it << std::endl;
         ++it;
     }

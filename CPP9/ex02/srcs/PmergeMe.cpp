@@ -28,84 +28,127 @@ PmergeMe &PmergeMe::operator=(const PmergeMe &src)
     return *this;
 }
 
-void PmergeMe::mergeInsertSortDeque(std::deque<int>& arr)
+void PmergeMe::sort(int ac, char **av)
 {
-    std::deque<int>::iterator it1, it2, copy_iter;
-    for (it1 = arr.begin() + 1; it1 != arr.end(); ++it1)
-    {
-        int temp = *it1;
-        it2 = it1;
-        copy_iter = it2;
-        while (it2 != arr.begin() && *(--copy_iter) > temp)
-        {
-            copy_iter = it2;
-            *it2 = *(--copy_iter);
-            std::advance(it2, -1);
+    std::list<int> list;
+    std::vector<int> vector;
+    for (int i = 1; i < ac; ++i){
+        if (av[i] != 0 && *av[i] != 0) {
+            std::istringstream is(av[i]);
+            int value;
+            is >> value;
+            if (value < 0 || !is.eof())
+                throw std::runtime_error("Error: Invalid input");
+            list.push_back(value);
+            vector.push_back(value);
+            }
         }
-        *it2 = temp;
-    }
+    execute(vector, list); 
 }
 
-void PmergeMe::mergeInsertSortList(std::list<int>& arr)
+void PmergeMe::execute(std::vector<int> &vector, std::list<int> &list)
 {
-    std::list<int>::iterator it1, it2, copy_iter;
-    for (it1 = ++arr.begin(); it1 != arr.end(); ++it1)
-    {
-        int temp = *it1;
-        it2 = it1;
-        copy_iter = it2;
-        while (it2 != arr.begin() && *(--copy_iter) > temp)
-        {
-            copy_iter = it2;
-            *it2 = *(--copy_iter);
-            std::advance(it2, -1);
-        }
-        *it2 = temp;
-    }
+    std::cout << "Before :  ";
+    this->display(list);
+    std::clock_t begin_l = std::clock();
+    mergeSort(list);
+    std::clock_t end_l = std::clock();
+    double time_l = static_cast<double>(end_l - begin_l) / CLOCKS_PER_SEC * 1000;
+    std::clock_t begin_v = std::clock();
+    mergeSort(vector);
+    std::clock_t end_v = std::clock();
+    double time_v = static_cast<double>(end_v - begin_v) / CLOCKS_PER_SEC * 1000;
+    std::cout << "After :   ";
+    this->display(vector);
+    std::cout << "Time to process a range of " << this->list.size() << " elements with std::list : " << time_l << " us" << std::endl;
+    std::cout << "Time to process a range of " << this->list.size() << " elements with std::vector : " << time_v << " us" << std::endl;
 }
 
 template <class T>
-void PmergeMe::display(const T &container)
+void PmergeMe::display(T &container)
 {
     typename T::const_iterator it;
-    for (it = container.begin(); it != container.end(); it++)
+    for (it = container.begin(); it != container.end(); ++it)
         std::cout << *it << " ";
     std::cout << std::endl;
 }
 
-void PmergeMe::mergeSort(int ac, char **av)
+void PmergeMe::mergeSort(std::vector<int> &vector)
 {
-    srand(time(NULL));
-    for (int i = 1; i < ac; ++i)
-    {
-        int value = std::atoi(av[i]);
-        if (value <= 0)
-        {
-            std::cerr << "Error: Invalid input value \"" << av[i] << "\". Only positive integers are allowed." << std::endl;
-			exit(1);
+    if (vector.size() < 2)
+        return ;
+
+    int mid = vector.size() / 2;
+    std::vector<int> left(vector.begin(), vector.begin() + mid);
+    std::vector<int> right(vector.begin() + mid, vector.end());
+    
+    mergeSort(left);
+    mergeSort(right);
+    sort_elem(left, right, vector);
+    this->vec = vector;
+}
+
+void PmergeMe::sort_elem(std::vector<int> &left, std::vector<int> &right, std::vector<int> &vector)
+{
+    int i = 0;
+    while (!left.empty() && !right.empty()) {
+        if (*left.begin() < *right.begin()) {
+            vector[i++] = left.front();
+            left.erase(left.begin());
+        } else {
+            vector[i++] = right.front();
+            right.erase(right.begin());
         }
-        this->inputDeque.push_back(value);
-        this->inputList.push_back(value);
     }
-    std::cout << "Before: ";
-    display(this->inputDeque);
 
-    clock_t start1 = clock();
-    mergeInsertSortDeque(this->inputDeque);
-    clock_t end1 = clock();
-    double time1 = static_cast<double>(end1 - start1) / CLOCKS_PER_SEC * 1000;
+    while (!left.empty()) {
+        vector[i++] = left.front();
+        left.erase(left.begin());
+    }
+    while (!right.empty()) {
+        vector[i++] = right.front();
+        right.erase(right.begin());
+    }
+}
 
-    clock_t start2 = clock();
-    mergeInsertSortList(this->inputList);
-    clock_t end2 = clock();
-    double time2 = static_cast<double>(end2 - start2) / CLOCKS_PER_SEC * 1000;
+void PmergeMe::mergeSort(std::list<int> &list)
+{
+    if (list.size() < 2)
+        return ;
+    std::list<int> left;
+    std::list<int> right;
+    std::list<int>::iterator it = list.begin();
+    
+    int mid = list.size() / 2;
+    for (int i = 0; i < mid; ++i)
+        left.push_back(*it++);
+    for (unsigned long i = mid; i < list.size(); ++i)
+        right.push_back(*it++);
+    mergeSort(left);
+    mergeSort(right);
+    sort_elem(left, right, list);
+    this->list = list;
+}
 
-    std::cout << "After: ";
-    display(this->inputDeque);
-    std::cout << "Time to process a range of " << this->inputDeque.size() << " elements with std::deque container: " << time1 << " us" << std::endl;
-    std::cout << "Time to process a range of " << this->inputList.size() << " elements with std::list container: " << time2 << " us" << std::endl;
-    if (this->inputDeque == std::deque<int>(this->inputList.begin(), this->inputList.end()))
-        std::cout << "The sorted sequences are equal." << std::endl;
-    else
-        std::cout << "The sorted sequences are not equal." << std::endl;
+void PmergeMe::sort_elem(std::list<int> &left, std::list<int> &right, std::list<int> &list)
+{
+    std::list<int>::iterator it = list.begin();
+    while (!left.empty() && !right.empty()) {
+        if (*left.begin() < *right.begin()) {
+            *it++ = left.front();
+            left.erase(left.begin());
+        } else {
+            *it++ = right.front();
+            right.erase(right.begin());
+        }
+    }
+
+    while (!left.empty()) {
+        *it++ = left.front();
+        left.erase(left.begin());
+    }
+    while (!right.empty()) {
+        *it++ = right.front();
+        right.erase(right.begin());
+    }
 }
