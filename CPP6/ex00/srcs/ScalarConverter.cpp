@@ -40,7 +40,6 @@ void ScalarConverter::convert(std::string convert)
 		std::cout << "double: nan" << std::endl;
 		return;
 	}
-	
 	if (convert == "+inf" || convert == "+inff" || convert == "inf" || convert == "inff") {
 		std::cout << "char: impossible" << std::endl;
 		std::cout << "int: impossible" << std::endl;
@@ -56,7 +55,6 @@ void ScalarConverter::convert(std::string convert)
 		std::cout << "double: -inf" << std::endl;
 		return;
 	}
-
 	if (len_convert == 1 && (convert[0] >= 32 && convert[0] <= 126) && !(convert[0] >= 48 && convert[0] <= 57)) {
 		char c = convert[0];
 		std::cout << "char: \'" << c << "\'" << std::endl;
@@ -65,7 +63,6 @@ void ScalarConverter::convert(std::string convert)
 		std::cout << "double: " << static_cast<double>(c) << ".0" << std::endl;
 		return;
 	}
-
 	long int i = std::strtol(convert.c_str(), &end, 10);
 	if (*end == '\0' && i >= INT_MIN && i <= INT_MAX) {
 		if (i < 0 || i > 127)
@@ -90,7 +87,7 @@ void ScalarConverter::convert(std::string convert)
         if (convert[i] == 'f' && point_before_f)
             is_f = true;
     }
-    if ((*end == 'f' || *end == 'F') && *(end + 1) == '\0' && is_f) {
+    if ((*end == 'f' || *end == 'F') && *(end + 1) == '\0' && (is_f || f != f)) {
         std::cout << "char: ";
         if (f >= 0 && f <= 127 && (static_cast<int>(f) >= 32 && static_cast<int>(f) <= 126))
             std::cout << "'" << static_cast<char>(f) << "'" << std::endl;
@@ -120,6 +117,7 @@ void ScalarConverter::convert(std::string convert)
             std::cout << std::fixed << std::setprecision(1) << static_cast<double>(f) << std::endl;
         return;  
     }
+
     double d = std::strtod(convert.c_str(), &end);
     errno = 0;
     if (*end == '\0') {
@@ -131,6 +129,8 @@ void ScalarConverter::convert(std::string convert)
 				std::cout << "impossible" << std::endl;
 			else if (d < ' ' || d > '~')
 				std::cout << "Non displayable" << std::endl;
+            else if (d != d)
+                std::cout << "impossible" << std::endl;
         }
 
         std::cout << "int: ";

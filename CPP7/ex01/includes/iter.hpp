@@ -3,13 +3,13 @@
 
 # include <iostream>
 
-template <class T>
+template <typename T>
 void iter(T *adr, int len, void (*func)(T &)) {
     for (int i = 0; i < len; i++)
         func(adr[i]);
 }
 
-template <class T>
+template <typename T>
 void print_elem(T &value) {
     std::cout << value << std::endl;
 }

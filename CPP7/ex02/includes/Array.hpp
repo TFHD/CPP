@@ -3,7 +3,7 @@
 
 # include <iostream>
 
-template <class T>
+template <typename T>
 class Array {
 
     private:
@@ -12,12 +12,12 @@ class Array {
 
     public:
         Array(void) : array(new T()), _size(0) {};
-        Array(unsigned int n) : array(new T[n]), _size(n) {};
+        Array(unsigned int n) : array(new T[n]), _size(n) { fill(0); };
         ~Array(void) {
-            if (_size != 0)
-                delete []array;
+            if (this->_size != 0)
+                delete []this->array;
             else
-                delete array;
+                delete this->array;
         };
 
         Array(const Array &src) : array(new T[src._size]), _size(src._size) {
@@ -27,25 +27,31 @@ class Array {
 
         Array &operator=(const Array &cpy) {
             if (this != &cpy) {
-                if (_size != 0)
-                    delete []array;
+                if (this->_size != 0)
+                    delete []this->array;
                 else
-                    delete array;
-                array = new T[cpy._size];
-                _size = cpy._size;
-                for (unsigned int i = 0; i < _size; i++)
+                    delete this->array;
+                if (cpy._size == 0) {
+                    this->array = new T();
+                    return *this;
+                }
+                this->array = new T[cpy._size];
+                this->_size = cpy._size;
+                for (unsigned int i = 0; i < this->_size; i++)
                     array[i] = cpy.array[i];
             }
             return *this;
         };
 
         T &operator[](unsigned int i) {
-            if (i < 0 || i >= _size)
+            if (i < 0 || i >= this->_size)
                 throw std::runtime_error("Index out of bounds !");
             return array[i];
         };
 
-        unsigned int size(void) const { return _size; };
+        unsigned int size(void) const { return this->_size; };
+        void fill(int number) { for(unsigned int i = 0; i < this->size(); i++) array[i] = number; }
+
 };
 
 #endif

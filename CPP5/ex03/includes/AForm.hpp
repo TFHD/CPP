@@ -3,7 +3,7 @@
 
 # include <iostream>
 #include "Bureaucrat.hpp"
-# define LOG 1
+# define LOG 0
 
 class Bureaucrat;
 

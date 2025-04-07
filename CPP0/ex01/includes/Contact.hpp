@@ -15,8 +15,7 @@ class Contact
     public:
         Contact();
         ~Contact(void);
-        void    set_infos(std::string first_name, std::string last_name,
-	        std::string nickname, std::string phone_number, std::string darkest_secret);
+        void    set_infos(std::string first_name, std::string last_name, std::string nickname, std::string phone_number, std::string darkest_secret);
         std::string get_first_name(unsigned int size);
         std::string get_last_name(unsigned int size);
         std::string get_nickname(unsigned int size);

@@ -83,3 +83,6 @@ std::ostream	&operator<<(std::ostream &o, Form const &form)
     << std::endl;
     return o;
 }
+
+const char *Form::GradeTooHighException::what() const throw() { return("\e[31mException\e[0m : The grade is too high"); }
+const char *Form::GradeTooLowException::what() const throw() { return("\e[31mException\e[0m : The grade is too low"); }

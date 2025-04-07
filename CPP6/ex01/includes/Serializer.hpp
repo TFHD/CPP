@@ -10,9 +10,9 @@
 class Serializer {
 
     private:
+        Serializer(void);
 
     public:
-        Serializer(void);
         virtual ~Serializer(void) = 0;
         Serializer(const Serializer &cpy);
         Serializer &operator=(const Serializer &src);

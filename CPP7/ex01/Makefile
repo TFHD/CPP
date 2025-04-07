@@ -1,6 +1,6 @@
-NAME		:= 	iter
+NAME		:= iter
 
-SRCS		:= 	main.cpp \
+SRCS		:= main.cpp \
 
 DIR		:=	srcs/
 

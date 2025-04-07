@@ -2,7 +2,7 @@
 # define BUREAUCRAT_HPP
 
 # include <iostream>
-# define LOG 1
+# define LOG 0
 
 class Bureaucrat {
 

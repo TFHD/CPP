@@ -1,4 +1,4 @@
-NAME		:= 	Array
+NAME		:= Array
 
 SRCS		:= main.cpp \
 
@@ -8,7 +8,7 @@ OBJS		:=	$(patsubst %.cpp, $(DIR)%.o, $(SRCS))
 
 CC			:= c++
 
-FLAGS 		:= -Wall -Werror -Wextra -I ./includes -std=c++98 -g
+FLAGS 		:= -Wall -Werror -Wextra -I ./includes -std=c++98
 
 TPUT 					= tput -T xterm-256color
 _RESET 					:= $(shell $(TPUT) sgr0)

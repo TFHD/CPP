@@ -92,7 +92,11 @@ std::ostream	&operator<<(std::ostream &o, Bureaucrat const &bureaucrat)
 
 void Bureaucrat::executeForm(AForm const & form)
 {
-    form.execute(*this);
+    try {
+        form.execute(*this);
+        std::cout << this->getName() << " executed " << form.getName() << std::endl; 
+    }
+    catch(std::exception &e) { std::cout << e.what() << std::endl; }
 }
 
 const char *Bureaucrat::GradeTooHighException::what() const throw() { return("\e[31mException\e[0m : The grade is too high"); }

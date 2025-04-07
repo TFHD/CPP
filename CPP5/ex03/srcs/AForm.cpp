@@ -14,14 +14,10 @@ grade_execute_need(grade_execute_need)
 {
     if (LOG)
         std::cout << "\e[32mThe AForm\e[0m " << this->name << " was created !" << std::endl;
-    try {
-        if (grade_sign_need < 1 || grade_execute_need < 1)
-            throw AForm::GradeTooHighException();
-        else if (grade_sign_need > 150 || grade_execute_need > 150)
-            throw AForm::GradeTooLowException();
-    }
-    catch (AForm::GradeTooHighException &e) { std::cout << e.what() << std::endl; }
-    catch (AForm::GradeTooLowException &e) { std::cout << e.what() << std::endl; }
+    if (grade_sign_need < 1 || grade_execute_need < 1)
+        throw AForm::GradeTooHighException();
+    else if (grade_sign_need > 150 || grade_execute_need > 150)
+        throw AForm::GradeTooLowException();
 }
 
 AForm::~AForm(void)

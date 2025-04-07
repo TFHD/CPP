@@ -3,7 +3,7 @@
 
 # include <iostream>
 #include "Bureaucrat.hpp"
-# define LOG 1
+# define LOG 0
 
 class Bureaucrat;
 
@@ -31,16 +31,12 @@ class Form {
         class GradeTooHighException : public std::exception {
         
             public:
-                virtual const char *what() const throw() {
-                    return("\e[31mException\e[0m : The grade is too high"); 
-                }
+                virtual const char *what() const throw();
         };
         class GradeTooLowException : public std::exception {
             
             public:
-                virtual const char *what() const throw() {
-                    return("\e[31mException\e[0m : The grade is too low"); 
-                }
+                virtual const char *what() const throw();
         };
 };
 

@@ -9,7 +9,7 @@ int main(void)
     Array<int> array1(len);
     Array<int> array2(len - 5);
 
-    for (unsigned int i = 0; i < array1.size(); i++ )
+    for (unsigned int i = 0; i < array1.size() - 1; i++ )
         array1[i] = i * 3;
 
 
@@ -41,7 +41,7 @@ int main(void)
 
     Array<int> array1_copy(array1);
 
-    std::cout << "Test with the copy by assignation of array1 size 10" << std::endl;
+    std::cout << "Test with the declaration copy of array1 size 10" << std::endl;
     
     for (unsigned int i = 0; i < array1_copy.size(); i++)
         std::cout << array1_copy[i] << " " ;
@@ -52,7 +52,7 @@ int main(void)
 
     array2 = array1;
 
-    std::cout << "Test with the copy by assignation of array1 size 10" << std::endl;
+    std::cout << "Test with the copy of array1 in array2" << std::endl;
     
     for (unsigned int i = 0; i < array2.size(); i++)
         std::cout << array2[i] << " " ;
