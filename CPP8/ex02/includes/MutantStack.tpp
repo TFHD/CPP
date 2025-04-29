@@ -1,28 +1,28 @@
 #include <iostream>
 #include "../includes/MutantStack.hpp"
 
-template <class T>
+template <typename T>
 MutantStack<T>::MutantStack(void) : std::stack<T>()
 {
     if (LOG)
         std::cout << "\e[32mThe MutantStack\e[0m default was created !" << std::endl;
 }
 
-template <class T>
+template <typename T>
 MutantStack<T>::~MutantStack(void)
 {
     if (LOG)
         std::cout << "\e[32mThe MutantStack\e[0m was destroyed !" << std::endl;
 }
 
-template <class T>
+template <typename T>
 MutantStack<T>::MutantStack(const MutantStack &cpy) : std::stack<T>(cpy)
 {
     if (LOG)
         std::cout << "\e[32mThe MutantStack\e[0m copy was created !" << std::endl;
 }
 
-template <class T>
+template <typename T>
 MutantStack<T> &MutantStack<T>::operator=(const MutantStack &src)
 {
     if (LOG)
@@ -32,13 +32,13 @@ MutantStack<T> &MutantStack<T>::operator=(const MutantStack &src)
     return *this;
 }
 
-template <class T>
+template <typename T>
 typename MutantStack<T>::iterator MutantStack<T>::begin(void)
 {
     return (std::stack<T>::c.begin());
 }
 
-template <class T>
+template <typename T>
 typename MutantStack<T>::iterator MutantStack<T>::end(void)
 {
     return (std::stack<T>::c.end());

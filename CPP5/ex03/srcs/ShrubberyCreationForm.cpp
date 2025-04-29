@@ -57,4 +57,6 @@ void ShrubberyCreationForm::executeAction(void) const
     } else {
         std::cout << "Failed to create the file." << std::endl;
     }
+
+    Trees Trees Trees Trees
 }

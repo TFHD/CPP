@@ -28,6 +28,7 @@ BitcoinExchange	&BitcoinExchange::operator=(const BitcoinExchange &src)
     if (this == &src)
         return *this;
     if (LOG) { std::cout << "\e[32mThe Span\e[0m Assignation operator called" << std::endl; }
+    this->data = src.data;
 	return *this;
 }
 
@@ -149,6 +150,10 @@ int BitcoinExchange::isGoodDate(std::string date)
     int year = std::atoi((date.substr(0, 4)).c_str());
     int month = std::atoi((date.substr(5, 7)).c_str());
     int day = std::atoi((date.substr(8, date.size())).c_str());
+    if (month == 4 || month == 6 || month == 9 || month == 11 || month == 2) {
+        if (day >= 31)
+            return 1;
+    }
     if (month == 0 || day == 0 || month > 12 || day > 31)
         return 1;
     if (day > 28 && month == 2) {
@@ -180,14 +185,19 @@ void BitcoinExchange::printChangeBitcoinValue(std::string file)
         date_nearest = getNearDate(date);
         after_pipe = line.substr(line.find("|") + 1, line.size());
         value = std::strtof(after_pipe.c_str(), NULL);
-
+        if (line[line.find("|") + 1] != ' ') {
+            std::cout << BAD_INPUT << date << std::endl;
+            continue;
+        }
+        if (!(std::istringstream(after_pipe) >> value))
+            std::cout << ERR_NAN << std::endl;
         if (!date_nearest.empty() && (value < 0 || value > 1000)) {
             if (value < 0)
                 std::cout << ERR_NEG_NUMBER << std::endl;
-            else
+            else if (value > 1000)
                 std::cout << ERR_SIZE_NUMBER << std::endl;
         }
-        else if (!date_nearest.empty()) {
+        else if (!date_nearest.empty() && (std::istringstream(after_pipe) >> value)) {
             std::cout << date << " => " << value << " = " << getValue(date_nearest) * value << std::endl;
         }
     }

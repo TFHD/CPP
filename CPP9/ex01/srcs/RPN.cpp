@@ -52,8 +52,8 @@ std::string RPN::solveRPN(std::stack<char> &stack)
         stack.pop();
     }
     if (rpn.size() != 1) throw std::runtime_error("Error");
-    if (rpn.top() > __INT_MAX__) return "inf+";
-    if (rpn.top() < -__INT_MAX__ + 1) return "inf-";
+    if (rpn.top() > __INT_MAX__) return "+inf";
+    if (rpn.top() < -__INT_MAX__ + 1) return "-inf";
     std::ostringstream oss;
     oss << rpn.top();
     std::string str = oss.str();

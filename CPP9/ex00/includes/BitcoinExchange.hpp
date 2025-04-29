@@ -6,6 +6,7 @@
 # include <map>
 # include <cstdlib>
 # include <algorithm>
+# include <sstream>
 
 # define LOG 0
 # define BAD_INPUT "Error : bad input => "
@@ -14,6 +15,7 @@
 # define ERR_NEG_NUMBER "Error : not a positive number"
 # define ERR_SIZE_NUMBER "Error : too large number"
 # define ERR_FILE_FORMAT "Error : bad data file format, .csv file is required !"
+# define ERR_NAN "Error : this is not a number !"
 
 class BitcoinExchange {
 

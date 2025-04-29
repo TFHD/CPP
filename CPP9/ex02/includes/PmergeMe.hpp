@@ -11,11 +11,12 @@
 # include <ctime>
 # define LOG 0
 
+template <typename T>
 class PmergeMe {
 
     private:
-        std::vector<int> vec;
-        std::list<int> list;
+        T pairs;
+        int last;
 
     public:
         PmergeMe(void);
@@ -23,14 +24,15 @@ class PmergeMe {
         PmergeMe(const PmergeMe &cpy);
         PmergeMe &operator=(const PmergeMe &src);
 
-        void sort(int ac, char **av);
-        void execute(std::vector<int> &vector, std::list<int> &list);
-        void mergeSort(std::list<int> &list);
-        void sort_elem(std::list<int> &left, std::list<int> &right, std::list<int> &list);
-        void mergeSort(std::vector<int> &vector);
-        void sort_elem(std::vector<int> &left, std::vector<int> &right, std::vector<int> &vector);
-        template <class T>
-        void display(T &container);
+        void sort(int ac, char **av, bool printable);
+        void sortPairs(T *pairs, int size);
+        void doPending(T *pairs, int pairsSize, std::vector<int> jacob);
+        void addPend(int pairsSize, int b, std::vector<int> *pend, std::vector<std::string> *pend_desc, T *pairs);
+        void addMain(int pairsSize, int b, std::vector<int> *main, std::vector<std::string> *main_desc, T *pairs);
+        void print_value(T pairs);
+        T generatePairs(std::vector<int> av);
+        int getSizePairs(T *pairs);
+        int getSizeList(void) const;
 };
-
+# include "PmergeMe.tpp"
 #endif

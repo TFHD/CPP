@@ -4,41 +4,47 @@
 
 //------------------------------FUNCTIONS FOR LIST LIKE MUTANTSTACK DISPLAY------------------------------------//
 
-template <class T>
+template <typename T>
 void showValuesLikeStackList(std::list<T> &list)
 {
-    typename std::list<T>::iterator ite = list.end();
-    unsigned int size = list.size();
-    unsigned int i = 0; 
-
-    --ite;
-    while (i < size)
+    if (list.size() > 0)
     {
-        std::cout<< "|  " << *ite << "  |" << std::endl;
+        typename std::list<T>::iterator ite = list.end();
+        unsigned int size = list.size();
+        unsigned int i = 0; 
+
         --ite;
-        i++;
+        while (i < size)
+        {
+            std::cout<< "|  " << *ite << "  |" << std::endl;
+            --ite;
+            i++;
+        }
     }
     std::cout << "|_____|" <<std::endl;
 }
 
-template <class T>
+template <typename T>
 void showValuesList(std::list<T> &list)
 {
-    typename std::list<T>::iterator it = list.begin();
-    typename std::list<T>::iterator ite = list.end();
-
-    std::cout << "{"; 
-    while (list.size() >= 1 && it != ite)
+    if (list.size() > 0)
     {
-        std::cout << *it;
-        ++it;
-        if (it != ite)
-            std::cout << ", "; 
+        typename std::list<T>::iterator it = list.begin();
+        typename std::list<T>::iterator ite = list.end();
+
+        std::cout << "{"; 
+        while (list.size() >= 1 && it != ite)
+        {
+            std::cout << *it;
+            ++it;
+            if (it != ite)
+                std::cout << ", "; 
+        }
     }
     std::cout << "}" <<std::endl;
 }
 
-template <class T>
+template <typename T>
 void addList(std::list<T> &list, T value)
 {
     list.push_back(value);
@@ -49,9 +55,13 @@ void addList(std::list<T> &list, T value)
     
 }
 
-template <class T>
+template <typename T>
 void removeList(std::list<T> &list)
 {
+    if (list.size() == 0) {
+        std::cout << "\e[1;33m/!\\Cannot remove a value, the stack is already empty /!\\ \e[0m" << std::endl;
+        return ;
+    }
     std::cout << "Pop : " << *list.begin() << "  ";
     list.pop_back();
     showValuesList(list);
@@ -59,41 +69,45 @@ void removeList(std::list<T> &list)
 
 //------------------------------FUNCTIONS FOR MUTATIONTSTACK DISPLAY------------------------------------//
 
-template <class T>
+template <typename T>
 void showValuesLikeStack(MutantStack<T> &stack)
 {
-    typename MutantStack<T>::iterator ite = stack.end();
-    unsigned int size = stack.size();
-    unsigned int i = 0; 
+    if (stack.size() > 0) {
+        typename MutantStack<T>::iterator ite = stack.end();
+        unsigned int size = stack.size();
+        unsigned int i = 0; 
 
-    --ite;
-    while (i < size)
-    {
-        std::cout<< "|  " << *ite << "  |" << std::endl;
         --ite;
-        i++;
+        while (i < size)
+        {
+            std::cout<< "|  " << *ite << "  |" << std::endl;
+            --ite;
+            i++;
+        }
     }
     std::cout << "|_____|" <<std::endl;
 }
 
-template <class T>
+template <typename T>
 void showValues(MutantStack<T> &stack)
 {
-    typename MutantStack<T>::iterator it = stack.begin();
-    typename MutantStack<T>::iterator ite = stack.end();
+    if (stack.size() > 0) {
+        typename MutantStack<T>::iterator it = stack.begin();
+        typename MutantStack<T>::iterator ite = stack.end();
 
-    std::cout << "{"; 
-    while (stack.size() >= 1 && it != ite)
-    {
-        std::cout << *it;
-        ++it;
-        if (it != ite)
-            std::cout << ", "; 
+        std::cout << "{"; 
+        while (stack.size() >= 1 && it != ite)
+        {
+            std::cout << *it;
+            ++it;
+            if (it != ite)
+                std::cout << ", "; 
+        }
+        std::cout << "}" <<std::endl;
     }
-    std::cout << "}" <<std::endl;
 }
 
-template <class T>
+template <typename T>
 void add(MutantStack<T> &stack, T value)
 {
     stack.push(value);
@@ -102,9 +116,13 @@ void add(MutantStack<T> &stack, T value)
     
 }
 
-template <class T>
+template <typename T>
 void remove(MutantStack<T> &stack)
 {
+    if (stack.size() == 0) {
+        std::cout << "\e[1;33m/!\\ Cannot remove a value, the stack is already empty /!\\ \e[0m" << std::endl;
+        return ;
+    }
     std::cout << "Pop : " << stack.top() << "  ";
     stack.pop();
     showValues(stack);

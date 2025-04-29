@@ -1,7 +1,6 @@
 NAME		:= PmergeMe
 
-SRCS		:=	PmergeMe.cpp \
-				main.cpp \
+SRCS		:= main.cpp \
 
 DIR		:=	srcs/
 
@@ -9,7 +8,7 @@ OBJS		:=	$(patsubst %.cpp, $(DIR)%.o, $(SRCS))
 
 CC			:= c++
 
-FLAGS 		:= -Wall -Werror -Wextra -I ./includes -std=c++98
+FLAGS 		:= -Wall -Werror -Wextra -I ./includes -std=c++98 -g
 
 TPUT 					= tput -T xterm-256color
 _RESET 					:= $(shell $(TPUT) sgr0)

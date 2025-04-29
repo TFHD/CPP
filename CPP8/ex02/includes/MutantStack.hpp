@@ -4,7 +4,7 @@
 # include <stack>
 # define LOG 0
 
-template <class T>
+template <typename T>
 class MutantStack : public std::stack<T> {
 
     private:
