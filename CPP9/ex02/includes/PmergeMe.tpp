@@ -1,5 +1,6 @@
 #include "../includes/PmergeMe.hpp"
 #include <cmath>
+#include <algorithm>
 
 template <typename T>
 PmergeMe<T>::PmergeMe(void)
@@ -287,6 +288,10 @@ void PmergeMe<T>::sort(int ac, char **av, bool printable)
         int push = std::strtol(av[i], 0, 0);
         if (push < 0 || !(std::istringstream(av[i]) >> push)) {
             std::cerr << "\e[31mOnly positive numbers ! \e[0m" << std::endl;
+            return;
+        }
+        if (std::find(data.begin(), data.end(), push) != data.end()) {
+            std::cerr << "\e[31mDuplicates numbers are unautorized in this code ! Sorry :{ \e[0m" << std::endl;
             return;
         }
         data.push_back(push);
